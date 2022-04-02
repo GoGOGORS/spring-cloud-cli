@@ -1,0 +1,31 @@
+server:
+  port: 8800
+
+spring:
+  application:
+    name: user-provider
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.199.5:8848
+
+  main:
+    allow-circular-references: true
+  # DataSource Config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rx_test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.rx.entity
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com:
+      rx:
+        mapper: debug

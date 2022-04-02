@@ -1,0 +1,26 @@
+server:
+  port: 8600
+
+spring:
+#  codec:
+#    max-in-memory-size: 1024
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.199.5:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: userServiceRouter
+          uri: http://user-consumer
+          predicates:
+            - Path=/api/userService/user/**
+          filters:
+            - StripPrefix=2
+
+
