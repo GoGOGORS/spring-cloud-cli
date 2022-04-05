@@ -2,8 +2,6 @@ server:
   port: 8600
 
 spring:
-#  codec:
-#    max-in-memory-size: 1024
   application:
     name: gateway
   cloud:

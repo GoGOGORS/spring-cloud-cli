@@ -1,0 +1,30 @@
+server:
+  port: 8900
+
+spring:
+  application:
+    name: rabbitmq-server
+  rabbitmq:
+    host: 192.168.199.5
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /jsf_test_host
+#    消息失败返回，比如路由不到队列
+    publisher-returns: true
+    template:
+      retry:
+        enabled: true
+        initial-interval: 2000
+    listener:
+      simple:
+#        手动ACK
+        acknowledge-mode: manual
+        concurrency: 1
+        max-concurrency: 1
+        retry:
+          enabled: true
+
+logging:
+  level:
+    org: ERROR
