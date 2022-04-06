@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author：Ruixiang
- * Date：2022:03:21 03:21
- * ProjectName：spring-cloud-cli
- * Description:
+ * @Date：2022:03:21 06:55
+ * @ProjectName：spring-cloud-cli
+ * @Description:
  */
 
 @EnableDiscoveryClient

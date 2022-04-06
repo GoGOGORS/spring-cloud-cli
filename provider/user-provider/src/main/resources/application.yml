@@ -8,10 +8,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.199.5:8848
+        server-addr: 192.168.200.5:8848
+        #server-addr: 192.168.199.5:8848
 
-  main:
-    allow-circular-references: true
+#  main:
+#    allow-circular-references: true
   # DataSource Config
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

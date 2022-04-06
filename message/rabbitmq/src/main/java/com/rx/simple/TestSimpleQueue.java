@@ -6,10 +6,10 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @author: Ruixiang
- * Date: 2022:04:04 23:39
- * ProjectName: spring-cloud-cli
- * Description:
+ * @author：Ruixiang
+ * @Date：2022:03:21 06:55
+ * @ProjectName：spring-cloud-cli
+ * @Description:
  */
 
 @Component

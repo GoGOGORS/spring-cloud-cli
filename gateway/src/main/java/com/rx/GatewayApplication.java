@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * @author: Ruixiang
- * Date: 2022:03:29 20:47
- * ProjectName: spring-cloud-cli
- * Description:
+ * @author：Ruixiang
+ * @Date：2022:03:21 06:55
+ * @ProjectName：spring-cloud-cli
+ * @Description:
  */
 
 @EnableDiscoveryClient

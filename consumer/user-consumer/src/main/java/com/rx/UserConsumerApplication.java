@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
- * Author：Ruixiang
- * Date：2022:03:21 05:59
- * ProjectName：spring-cloud-cli
- * Description:
+ * @author：Ruixiang
+ * @Date：2022:03:21 06:55
+ * @ProjectName：spring-cloud-cli
+ * @Description:
  */
 
 @EnableFeignClients
