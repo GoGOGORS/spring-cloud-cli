@@ -26,6 +26,9 @@ public class UserConsumerController {
     public String addUser(@PathVariable String userName){
         return userFeignService.addUser(userName);
     }
+    
+    
+    
 
 
 }
