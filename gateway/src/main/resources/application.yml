@@ -16,7 +16,7 @@ spring:
           lower-case-service-id: true
       routes:
         - id: userServiceRouter
-          uri: http://user-consumer
+          uri: lb://user-consumer
           predicates:
             - Path=/api/userService/**
           filters:

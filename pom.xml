@@ -19,9 +19,15 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <nacos-discovery.version>0.9.0.RELEASE</nacos-discovery.version>
-        <spring-boot.version>2.6.4</spring-boot.version>
-        <spring-cloud.version>2021.0.1</spring-cloud.version>
+        <maven.source.version>1.8</maven.source.version>
+        <maven.target.version>1.8</maven.target.version>
+        <!--<spring-boot.version>2.6.4</spring-boot.version>
+        <spring.alibaba.version>2021.0.1.0</spring.alibaba.version>
+        <spring-cloud.version>2021.0.1</spring-cloud.version>-->
+
+        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+        <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
+        <spring.alibaba.version>2.2.7.RELEASE</spring.alibaba.version>
     </properties>
 
     <dependencies>
@@ -116,19 +122,12 @@
                 <type>pom</type>
             </dependency>
 
-
-            <!--<dependency>
+            <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2021.0.1.0</version>
+                <version>${spring.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>-->
-
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>${nacos-discovery.version}</version>
             </dependency>
 
             <dependency>
@@ -182,8 +181,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${maven.source.version}</source>
+                    <target>${maven.target.version}</target>
                 </configuration>
             </plugin>
         </plugins>
