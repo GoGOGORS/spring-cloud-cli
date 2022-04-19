@@ -1,10 +1,7 @@
 package com.rx.controller;
 
 import com.rx.feign.UserFeignService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -29,8 +26,8 @@ public class UserConsumerController {
     
     
     
-
-
+    
+    
 }
 
 
