@@ -6,21 +6,27 @@
     <groupId>com.rx</groupId>
     <artifactId>spring-cloud-cli</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <modules>
         <module>provider</module>
         <module>consumer</module>
         <module>message</module>
         <module>gateway</module>
     </modules>
+
     <name>spring-cloud-cli</name>
     <packaging>pom</packaging>
-
     <description>spring-cloud-cli</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <maven.source.version>1.8</maven.source.version>
-        <maven.target.version>1.8</maven.target.version>
+        <maven.test.skip>true</maven.test.skip>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <maven-surefire-plugin>3.0.0-M5</maven-surefire-plugin>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
         <!--<spring-boot.version>2.6.4</spring-boot.version>
         <spring.alibaba.version>2021.0.1.0</spring.alibaba.version>
         <spring-cloud.version>2021.0.1</spring-cloud.version>-->
@@ -162,6 +168,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -178,11 +185,42 @@
                     </excludes>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>${maven.source.version}</source>
-                    <target>${maven.target.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <charset>${project.build.sourceEncoding}</charset>
+                            <docencoding>${project.build.sourceEncoding}</docencoding>
+                            <!-- 忽略非标准javadoc注释 -->
+                            <doclint>none</doclint>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin}</version>
+                <configuration>
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
         </plugins>
