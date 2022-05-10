@@ -4,9 +4,19 @@ server:
 spring:
   application:
     name: user-consumer
-
   cloud:
     nacos:
       discovery:
         server-addr: 47.107.52.47:8848
-        #server-addr: 192.168.199.5:8848
+        namespace: 776dcf72-f1df-4595-ad94-671dd4673b06
+
+
+
+logging:
+  file:
+    path: ./logs/${spring.application.name}.log
+  config: classpath:log4j2.xml
+  level:
+    root: info
+    sql: info
+    web: info
