@@ -1,0 +1,34 @@
+server:
+  port: 11111
+
+spring:
+  application:
+    name: @artifactId@
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8&&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false&connectTimeout=0&useSSL=false
+    username: root
+    password: root
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 12
+      connection-init-sql: SELECT 1
+      idle-timeout: 600000
+      max-lifetime: 540000
+      connection-timeout: 60000
+      connection-test-query: SELECT 1
+
+  data:
+    elasticsearch:
+      cluster-name: pro-elastisearch
+      cluster-nodes: 47.107.52.47:9300
+
+logging:
+  path: ./logs/${spring.application.name}.log
+  level:
+    root: info
+#    org.springframework: info
+#    com.mysql: info
+#    org.springframework.web: debug
+
+    org.elasticsearch: info

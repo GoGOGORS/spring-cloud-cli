@@ -15,20 +15,17 @@
         <property name="FILE_LOG_PATTERN">%d{${LOG_DATEFORMAT_PATTERN}} ${LOG_LEVEL_PATTERN} ${SLEUTH_PATTERN} ${sys:PID} --- [%t] %-40.40c{1.} : %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</property>
     </Properties>
 
-
     <Appenders>
         <!--CONSOLE-->
         <console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${FILE_LOG_PATTERN}"
-                           charset="UTF-8"/>
-           <!-- <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/> -->
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN} %n" charset="UTF-8"/>
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
         </console>
 
         <!-- file -->
         <RollingFile name="trace_file" fileName="${LOG_PATH}/trace.log"
                      filePattern="${LOG_PATH}/$${date:yyyy-MM}/trace-%d{yyyy-MM-dd-HH}-%i.log.gz">
             <Filters>
-                <!-- 只记录error级别信息 -->
                 <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
             <PatternLayout>
@@ -100,12 +97,12 @@
 
 
         <logger name="org.springframework" level="warn"/>
-        <logger name="org.springframework.cloud.config" level="trace"/>
-        <logger name="org.springframework.cloud.sleuth" level="trace"/>
+        <logger name="org.springframework.cloud.config" level="debug"/>
+        <logger name="org.springframework.cloud.sleuth" level="debug"/>
         <logger name="org.springframework.cloud.sleuth.instrument" level="warn"/>
-        <!-- <logger name="org.springframework.cloud.sleuth.log" level="warn"/>
-         <logger name="org.springframework.cloud.sleuth.metric" level="warn"/>
-         <logger name="org.springframework.cloud.sleuth.trace.SpanContextHolder" level="warn"/>-->
+       <!-- <logger name="org.springframework.cloud.sleuth.log" level="warn"/>
+        <logger name="org.springframework.cloud.sleuth.metric" level="warn"/>
+        <logger name="org.springframework.cloud.sleuth.trace.SpanContextHolder" level="warn"/>-->
         <logger name="org.springframework.cloud.config.client" level="WARN"/>
         <logger name="org.springframework.boot.web" level="info"/>
         <logger name="org.springframework.amqp" level="info"/>
@@ -116,7 +113,7 @@
 
         <logger name="com.ywyw" level="debug"/>
         <logger name="com.xxl" level="info"/>
-        <logger name="com.alibaba" level="info"/>
+        <logger name="com.alibaba.cloud" level="info"/>
         <!--<logger name="com.baomidou" level="WARN"/>-->
         <!--<logger name="org.mybatis" level="WARN"/>-->
         <!--<logger name="org.hibernate" level="WARN"/>-->
@@ -127,12 +124,12 @@
         <logger name="org.springframework" level="warn"/>
 
 
-        <AsyncRoot level="info" includeLocation = "true">
+        <AsyncRoot level="debug" includeLocation = "true">
             <AppenderRef ref="trace_file" />
             <AppenderRef ref="debug_file" />
-            <AppenderRef ref="INFO_FILE" />
-            <AppenderRef ref="WARN_FILE" />
-            <AppenderRef ref="ERROR_FILE" />
+            <AppenderRef ref="info_file" />
+            <AppenderRef ref="warn_file" />
+            <AppenderRef ref="error_file" />
             <AppenderRef ref="console" level = "debug" />
         </AsyncRoot>
     </Loggers>
