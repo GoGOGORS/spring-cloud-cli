@@ -9,7 +9,6 @@ import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * {@code @author: jsf}
@@ -25,14 +24,13 @@ public class TestCategory implements Serializable {
     @Id
     private int id;
 
-    @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
+    @Field(index = FieldIndex.analyzed, type = FieldType.String, analyzer = "ik_max_word")
     private String name;
 
     @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
     private String address;
 
-    @Field(index = FieldIndex.not_analyzed, type = FieldType.Nested)
-    private List<CategoryInfo> categoryInfo;
+    private CategoryInfo categoryInfo;
 
 
 }

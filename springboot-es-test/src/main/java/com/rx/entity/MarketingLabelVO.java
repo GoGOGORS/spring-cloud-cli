@@ -1,0 +1,32 @@
+package com.rx.entity;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+/**
+ * 营销标签
+ * Created by dyt on 2018/2/28.
+ */
+@Data
+public class MarketingLabelVO implements Serializable {
+
+    private static final long serialVersionUID = -3098691550938179678L;
+
+    /**
+     * 营销编号
+     */
+    private Long marketingId;
+
+    /**
+     * 促销类型 0：满减 1:满折 2:满赠
+     * 与Marketing.marketingType保持一致
+     */
+    private Integer marketingType;
+
+    /**
+     * 促销描述
+     */
+    private String marketingDesc;
+
+}

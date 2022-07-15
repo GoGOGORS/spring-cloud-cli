@@ -2,7 +2,6 @@ package com.rx.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -16,13 +15,13 @@ import java.io.Serializable;
  */
 
 @Data
-@Document(indexName = "test_category_info", type = "category_info")
+// @Document(indexName = "test_category_info", type = "category_info")
 public class CategoryInfo implements Serializable {
 
     @Id
     private Integer categoryId;
 
-    @Field(index = FieldIndex.not_analyzed, type = FieldType.String)
+    @Field(index = FieldIndex.analyzed, type = FieldType.String, analyzer = "ik_max_word")
     private String categoryName;
 
     @Field(index = FieldIndex.not_analyzed, type = FieldType.Double)

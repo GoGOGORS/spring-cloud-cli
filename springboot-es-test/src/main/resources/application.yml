@@ -1,5 +1,5 @@
 server:
-  port: 11111
+  port: 10001
 
 spring:
   application:
@@ -22,9 +22,18 @@ spring:
     elasticsearch:
       cluster-name: pro-elastisearch
       cluster-nodes: 47.107.52.47:9300
+    mongodb:
+#      host: dds-wz9f5a21c8efe6041.mongodb.rds.aliyuncs.com
+#      port: 3717
+#      database: b2b
+#      username: b2b
+#      password: 4aO$Mc@ElwxM254S
+      repositories:
+        enabled: true
+      uri: mongodb://mongo-test:123456@47.107.52.47:27017/b2b
 
 logging:
-  path: ./logs/${spring.application.name}.log
+  path: ../logs/${spring.application.name}.log
   level:
     root: info
 #    org.springframework: info
