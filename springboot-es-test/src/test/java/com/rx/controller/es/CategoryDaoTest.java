@@ -1,5 +1,6 @@
 package com.rx.controller.es;
 
+import cn.hutool.core.date.DateUtil;
 import com.mongodb.DB;
 import com.rx.entity.Account;
 import com.rx.entity.EsGoods;
@@ -9,6 +10,8 @@ import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsReques
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsResponse;
 import org.elasticsearch.action.admin.indices.exists.types.TypesExistsRequest;
 import org.elasticsearch.action.admin.indices.exists.types.TypesExistsResponse;
+import org.elasticsearch.common.unit.DistanceUnit;
+import org.elasticsearch.index.query.GeoDistanceQueryBuilder;
 import org.elasticsearch.index.query.MoreLikeThisQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
@@ -28,10 +31,10 @@ import javax.annotation.Resource;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.*;
 
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 
 @Slf4j
@@ -155,10 +158,20 @@ public class CategoryDaoTest {
 
     @Test
     public void esSearch3() {
+        // 以某点为中心，搜索指定范围
+        GeoDistanceQueryBuilder distanceQueryBuilder = new GeoDistanceQueryBuilder("location");
+        distanceQueryBuilder.point(0.00, 0.00);
+        // 定义查询单位：公里
+        distanceQueryBuilder.distance(10000, DistanceUnit.KILOMETERS);
+
         SearchQuery query = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.boolQuery().must(termsQuery("companyCateIds", Arrays.asList(214, 215, 216, 217)))
-                        .must(termsQuery("storeState", "1"))
+                        .must(termsQuery("storeState", "0"))
+                        .must(rangeQuery("contractStartDate").lte(DateUtil.format(LocalDateTime.now(), "yyyy-MM-dd HH:mm:ss.SSS")))
+                        .must(rangeQuery("contractEndDate").gte(DateUtil.format(LocalDateTime.now(), "yyyy-MM-dd HH:mm:ss.SSS")))
+                        .filter(distanceQueryBuilder)
                 ).build();
+
 
         List<Account> esStores = elasticsearchTemplate.queryForList(query, Account.class);
 
