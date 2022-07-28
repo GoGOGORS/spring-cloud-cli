@@ -5,7 +5,7 @@
     <parent>
         <artifactId>spring-cloud-cli</artifactId>
         <groupId>com.rx</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -18,6 +18,8 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <druid.version>1.2.11</druid.version>
     </properties>
 
     <dependencies>
@@ -48,6 +50,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
@@ -55,7 +63,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.1</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
     </dependencies>
 

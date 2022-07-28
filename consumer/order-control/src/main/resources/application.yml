@@ -1,5 +1,5 @@
 server:
-  port: 8700
+  port: 8701
 
 spring:
   application:
@@ -21,18 +21,19 @@ rx:
     licenseUrl: http://www.baidu.com
     termsOfServiceUrl: https://github.com/
     dockets:
-      user-control:
-        title: user-Swagger2
-        description: User description
+      order-contol:
+        title: order-Swagger2
+        description: Order description
         version: ${rx.doc}
         basePackage: com.rx.controller
+
 
 
 
 logging:
   file:
     path: ./logs/${spring.application.name}.log
-  config: classpath:log4j2-spring.xml
+  config: classpath:log4j2.xml
   level:
     root: info
     sql: info

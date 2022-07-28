@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration status = "INFO">
+    <Properties>
+        <property name="applicationName">payment-control</property>
+        <property name="LOG_PATH">/data/logs/payment-control</property>
+
+        <property name="PID">????</property>
+        <property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</property>
+        <property name="LOG_LEVEL_PATTERN">%5p</property>
+        <property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</property>
+        <property name="SLEUTH_PATTERN">[%X{X-B3-TraceId},%X{X-B3-SpanId}]</property>
+
+        <property name="CONSOLE_LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{cyan} %clr{[%-5p]}{green} %clr{PID-${sys:PID}}{magenta} %clr{[%X{X-B3-TraceId},%X{X-B3-SpanId}]}{blue} %clr{---}{faint} %clr{[%0.15t]}{faint} %clr{%c{10}}{cyan} %clr{(%method)}{blue}%clr{[%L]} %m%n ${sys:LOG_EXCEPTION_CONVERSION_WORD}</property>
+        <property name="FILE_LOG_PATTERN">%d{${LOG_DATEFORMAT_PATTERN}} ${LOG_LEVEL_PATTERN} ${SLEUTH_PATTERN} ${sys:PID} --- [%t] %-40.40c{1.} : %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</property>
+    </Properties>
+
+    <Appenders>
+        <!--CONSOLE-->
+        <console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN} %n" charset="UTF-8"/>
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+        </console>
+
+        <!-- file -->
+        <RollingFile name="trace_file" fileName="${LOG_PATH}/trace.log"
+                     filePattern="${LOG_PATH}/$${date:yyyy-MM}/trace-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="debug_file" fileName="${LOG_PATH}/debug.log"
+                     filePattern="${sys:LOG_PATH}/$${date:yyyy-MM}/debug-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="info_file" fileName="${LOG_PATH}/info.log"
+                     filePattern="${sys:LOG_PATH}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+
+
+        <RollingFile name="warn_file" fileName="${LOG_PATH}/warn.log"
+                     filePattern="${sys:LOG_PATH}/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="error_file" fileName="${LOG_PATH}/error.log"
+                     filePattern="${sys:LOG_PATH}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="org.apache.catalina.startup.DigesterFactory" level="error" />
+        <Logger name="org.apache.catalina.util.LifecycleBase" level="error" />
+        <Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn" />
+        <logger name="org.apache.sshd.common.util.SecurityUtils" level="warn"/>
+        <Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn" />
+        <Logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="error" />
+        <Logger name="org.hibernate.validator.internal.util.Version" level="warn" />
+        <logger name="org.springframework.boot.actuate.endpoint.jmx" level="warn"/>
+        <logger name="org.springframework.boot.actuate.endpoint.jmx" level="warn"/>
+
+
+        <logger name="org.springframework" level="warn"/>
+        <logger name="org.springframework.cloud.config" level="info"/>
+        <logger name="org.springframework.cloud.sleuth" level="debug"/>
+        <logger name="org.springframework.cloud.sleuth.instrument" level="warn"/>
+       <!-- <logger name="org.springframework.cloud.sleuth.log" level="warn"/>
+        <logger name="org.springframework.cloud.sleuth.metric" level="warn"/>
+        <logger name="org.springframework.cloud.sleuth.trace.SpanContextHolder" level="warn"/>-->
+        <logger name="org.springframework.cloud.config.client" level="WARN"/>
+        <logger name="org.springframework.boot.web" level="info"/>
+        <logger name="org.springframework.amqp" level="info"/>
+        <logger name="org.springframework.data.redis" level="info"/>
+        <logger name="org.springframework.data.mongodb" level="info"/>
+        <logger name="org.springframework.data.elasticsearch" level="info"/>
+        <logger name="org.springframework.cloud.openfeign" level="info"/>
+
+        <logger name="com.ywyw" level="debug"/>
+        <logger name="com.xxl" level="info"/>
+        <logger name="com.alibaba.cloud" level="info"/>
+        <!--<logger name="com.baomidou" level="WARN"/>-->
+        <!--<logger name="org.mybatis" level="WARN"/>-->
+        <!--<logger name="org.hibernate" level="WARN"/>-->
+        <logger name="com.netflix" level="WARN"/>
+        <logger name="io.netty" level="WARN"/>
+        <logger name="org.apache" level="WARN"/>
+        <logger name="io.undertow" level="WARN"/>
+        <logger name="org.springframework" level="warn"/>
+
+
+        <AsyncRoot level="debug" includeLocation = "true">
+            <AppenderRef ref="trace_file" />
+            <AppenderRef ref="debug_file" />
+            <AppenderRef ref="info_file" />
+            <AppenderRef ref="warn_file" />
+            <AppenderRef ref="error_file" />
+            <AppenderRef ref="console" level = "debug" />
+        </AsyncRoot>
+    </Loggers>
+
+</configuration>

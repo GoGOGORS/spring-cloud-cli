@@ -37,12 +37,6 @@
             </exclusions>
         </dependency>
 
-        <!-- Log4j SpringBoot -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-spring-boot</artifactId>
-        </dependency>
-
         <!-- Log4j2 Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

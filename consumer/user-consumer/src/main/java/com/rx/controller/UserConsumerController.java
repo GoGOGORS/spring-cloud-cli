@@ -1,6 +1,7 @@
 package com.rx.controller;
 
 import com.rx.feign.UserFeignService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/user")
+@Api("用户control")
 public class UserConsumerController {
 
     @Resource
