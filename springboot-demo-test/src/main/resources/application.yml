@@ -4,7 +4,28 @@ server:
 spring:
   application:
     name: @artifactId@
+  profiles:
+    active: prod
 
 
 logging:
   config: classpath:log4j2-spring.xml
+
+---
+spring:
+  profiles: dev
+server:
+  port: 11111
+---
+
+spring:
+  profiles: test
+server:
+  port: 11112
+---
+
+spring:
+  profiles: prod
+server:
+  port: 11113
+---
