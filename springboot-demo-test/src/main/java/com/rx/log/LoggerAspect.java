@@ -36,7 +36,6 @@ public class LoggerAspect {
 
     }
 
-
     @Around("executeService()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
@@ -46,7 +45,7 @@ public class LoggerAspect {
 
         String url = request.getRequestURL().toString();
         String method = request.getMethod();
-        String uri = request.getRequestURI();
+        // String uri = request.getRequestURI();
         String queryString = request.getQueryString();
         List<Object> postReqParam = Arrays.asList(pjp.getArgs());
         String params = "";
@@ -56,10 +55,10 @@ public class LoggerAspect {
             params = URLDecoder.decode(queryString, "UTF-8");
         }
 
-        log.info("request uri：{}, url：{}, type：{}， params：{}", uri, url, method, params);
+        log.info("request url: {}, request type: {}, request params: {}", url, method, params);
         Object result = pjp.proceed();
         if (!ObjectUtil.isEmpty(result)){
-            log.info("response result：{}", JSONUtil.toJsonStr(result));
+            log.info("response result: {}", JSONUtil.toJsonStr(result));
         }
         return result;
     }

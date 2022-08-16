@@ -1,6 +1,5 @@
 package com.rx.controller;
 
-import cn.hutool.core.util.IdUtil;
 import com.rx.base.BaseResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,8 +33,12 @@ public class TestController {
     }
 
 
-    public static void main(String[] args) {
-        System.out.println(IdUtil.getSnowflakeNextId());
+    @GetMapping("/test4")
+    public Object test4(){
+        return BaseResult.ok();
     }
+
+
+
 
 }
