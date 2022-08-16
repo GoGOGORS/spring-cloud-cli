@@ -18,7 +18,7 @@
     <Appenders>
         <!--CONSOLE-->
         <console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${CONSOLE_LOG_PATTERN} %n" charset="UTF-8"/>
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}" charset="UTF-8"/>
             <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
         </console>
 

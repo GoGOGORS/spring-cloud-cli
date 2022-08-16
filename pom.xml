@@ -32,6 +32,7 @@
 
         <swagger2.version>3.0.0</swagger2.version>
         <swagger-ui.version>3.0.0</swagger-ui.version>
+        <hutool-all.version>5.8.5</hutool-all.version>
         <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
 
         <!--<spring-boot.version>2.3.12.RELEASE</spring-boot.version>
@@ -95,6 +96,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool-all.version}</version>
         </dependency>
 
 <!--        <dependency>-->
