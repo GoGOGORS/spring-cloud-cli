@@ -4,6 +4,24 @@ spring:
     name: @artifactId@
   profiles:
     active: dev
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  redis:
+    host: 47.107.90.15
+    port: 6379
+    database: 12
+    connect-timeout: 30000
+  #redis 单机地址
+  redisson: address=192.168.1.204:6379
+
+
+feign:
+  httpclient:
+    enabled: true
+    connection-timeout: 10000
+    connection-timer-repeat: 10000
 
 
 logging:

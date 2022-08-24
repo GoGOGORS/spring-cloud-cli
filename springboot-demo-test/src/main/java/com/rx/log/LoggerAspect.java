@@ -2,6 +2,7 @@ package com.rx.log;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
+import com.rx.base.BaseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -37,30 +38,37 @@ public class LoggerAspect {
     }
 
     @Around("executeService()")
-    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+    public BaseResult<Object> doAround(ProceedingJoinPoint pjp){
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
         assert servletRequestAttributes != null;
         HttpServletRequest request = servletRequestAttributes.getRequest();
+        BaseResult<Object> result;
 
-        String url = request.getRequestURL().toString();
-        String method = request.getMethod();
-        // String uri = request.getRequestURI();
-        String queryString = request.getQueryString();
-        List<Object> postReqParam = Arrays.asList(pjp.getArgs());
-        String params = "";
-        if ("POST".equals(method) && !CollectionUtils.isEmpty(postReqParam)) {
-            params = JSONUtil.toJsonStr(postReqParam);
-        } else if ("GET".equals(method) && StringUtils.hasLength(queryString)) {
-            params = URLDecoder.decode(queryString, "UTF-8");
+        try {
+            String url = request.getRequestURL().toString();
+            String method = request.getMethod();
+            // String uri = request.getRequestURI();
+            String queryString = request.getQueryString();
+            List<Object> postReqParam = Arrays.asList(pjp.getArgs());
+            String params = "";
+            if ("POST".equals(method) && !CollectionUtils.isEmpty(postReqParam)) {
+                params = JSONUtil.toJsonStr(postReqParam);
+            } else if ("GET".equals(method) && StringUtils.hasLength(queryString)) {
+                params = URLDecoder.decode(queryString, "UTF-8");
+            }
+
+            log.info("request url: {}, request type: {}, request params: {}", url, method, params);
+            result = BaseResult.ok(pjp.proceed(pjp.getArgs()));
+            if (!ObjectUtil.isEmpty(result)){
+                log.info("response result: {}", JSONUtil.toJsonStr(result));
+            }
+            return result;
+        } catch (Throwable e){
+            log.error("系统异常：{}", e);
+            return BaseResult.error(e.getMessage());
         }
 
-        log.info("request url: {}, request type: {}, request params: {}", url, method, params);
-        Object result = pjp.proceed();
-        if (!ObjectUtil.isEmpty(result)){
-            log.info("response result: {}", JSONUtil.toJsonStr(result));
-        }
-        return result;
     }
 
 
