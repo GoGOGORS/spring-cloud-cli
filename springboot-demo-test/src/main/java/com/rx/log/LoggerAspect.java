@@ -59,7 +59,7 @@ public class LoggerAspect {
             }
 
             log.info("request url: {}, request type: {}, request params: {}", url, method, params);
-            result = BaseResult.ok(pjp.proceed(pjp.getArgs()));
+            result = (BaseResult<Object>)pjp.proceed(pjp.getArgs());
             if (!ObjectUtil.isEmpty(result)){
                 log.info("response result: {}", JSONUtil.toJsonStr(result));
             }
