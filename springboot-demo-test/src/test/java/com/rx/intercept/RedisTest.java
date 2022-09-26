@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 
 
@@ -73,6 +74,13 @@ public class RedisTest {
     public void test5(){
         JWT jwt = JWTUtil.parseToken("eyJhbGciOiJIUzI1NiIsImNhbGciOiJERUYifQ.eNpkzTsOwyAQBNC7bG1Fy4L5uEukFFZ-Z8CYIgUmMlBYUe4eKKIU1jarNyPNG1KZYADWI3EpuSAGHTxthoFJiUZp2WMHrqQcg1_HuXYFkvZiUkrPnBsiZO3TJKxRiEjw7x-di2XJu4FffrfB79dfjUgdsF6DtKXsQ8Xb4zRez1VWu8wxXPxWkRQZLUjC5wsAAP__.IhZbdKnXHGmhclRVTRuypvCrzwaVeZEdcWO5OLkbK1I");
         System.out.println(jwt.getHeader());
+    }
+
+
+    @Test
+    public void test6(){
+        System.out.println(Objects.nonNull(null));
+
     }
 
 

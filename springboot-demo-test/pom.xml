@@ -78,11 +78,11 @@
             <optional>true</optional>
         </dependency>
 
-      <!--  <dependency>
+        <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.2</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -97,16 +97,16 @@
         </dependency>
 
 
-        <!-- <dependency>
+         <dependency>
              <groupId>com.alibaba</groupId>
              <artifactId>druid-spring-boot-starter</artifactId>
              <version>1.2.11</version>
          </dependency>
- 
+
          <dependency>
              <groupId>mysql</groupId>
              <artifactId>mysql-connector-java</artifactId>
-         </dependency>-->
+         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>

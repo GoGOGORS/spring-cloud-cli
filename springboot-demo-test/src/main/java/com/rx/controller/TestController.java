@@ -60,7 +60,7 @@ public class TestController {
         String now = LocalDate.now().format(dateTimeFormatter);
         RAtomicLong atomicLong = redisson.getAtomicLong(now);
         atomicLong.expire(Duration.ofDays(1));
-        return BaseResult.ok(now + "" + atomicLong.incrementAndGet());
+        return BaseResult.ok(now + "" + String.format("%08d", atomicLong.incrementAndGet()));
     }
 
 

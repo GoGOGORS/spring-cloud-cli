@@ -58,14 +58,14 @@ public class LoggerAspect {
                 params = URLDecoder.decode(queryString, "UTF-8");
             }
 
-            log.info("request url: {}, request type: {}, request params: {}", url, method, params);
+            log.info("request url: [{}], request type: [{}], request params: [{}]", url, method, params);
             result = (BaseResult<Object>)pjp.proceed(pjp.getArgs());
             if (!ObjectUtil.isEmpty(result)){
-                log.info("response result: {}", JSONUtil.toJsonStr(result));
+                log.info("response result: [{}]", JSONUtil.toJsonStr(result));
             }
             return result;
         } catch (Throwable e){
-            log.error("系统异常：{}", e);
+            log.error("系统异常：[{}]", e);
             return BaseResult.error(e.getMessage());
         }
 
