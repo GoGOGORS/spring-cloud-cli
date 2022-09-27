@@ -1,6 +1,7 @@
 package com.rx.log;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONUtil;
 import com.rx.base.BaseResult;
 import lombok.extern.slf4j.Slf4j;
@@ -38,19 +39,20 @@ public class LoggerAspect {
     }
 
     @Around("executeService()")
-    public BaseResult<Object> doAround(ProceedingJoinPoint pjp){
+    public Object doAround(ProceedingJoinPoint pjp){
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
         assert servletRequestAttributes != null;
         HttpServletRequest request = servletRequestAttributes.getRequest();
-        BaseResult<Object> result;
+        Object result;
 
         try {
             String url = request.getRequestURL().toString();
             String method = request.getMethod();
-            // String uri = request.getRequestURI();
+            String uri = request.getRequestURI();
             String queryString = request.getQueryString();
             List<Object> postReqParam = Arrays.asList(pjp.getArgs());
+
             String params = "";
             if ("POST".equals(method) && !CollectionUtils.isEmpty(postReqParam)) {
                 params = JSONUtil.toJsonStr(postReqParam);
@@ -58,14 +60,17 @@ public class LoggerAspect {
                 params = URLDecoder.decode(queryString, "UTF-8");
             }
 
-            log.info("request url: [{}], request type: [{}], request params: [{}]", url, method, params);
-            result = (BaseResult<Object>)pjp.proceed(pjp.getArgs());
+            log.info("request url: {}, request type: {}, request token: {}, request params: {}",
+                    url, method, request.getHeader("Authorization"), params);
+            result = pjp.proceed(pjp.getArgs());
             if (!ObjectUtil.isEmpty(result)){
-                log.info("response result: [{}]", JSONUtil.toJsonStr(result));
+                JSONConfig jsonConfig = new JSONConfig();
+                jsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+                log.info("response result: {}", JSONUtil.toJsonStr(result, jsonConfig));
             }
             return result;
         } catch (Throwable e){
-            log.error("系统异常：[{}]", e);
+            log.error("系统异常：", e);
             return BaseResult.error(e.getMessage());
         }
 
