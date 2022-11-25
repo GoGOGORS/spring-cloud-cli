@@ -1,0 +1,26 @@
+server:
+  port: 8900
+
+
+
+logging:
+  level:
+    root: debug
+    org.springframework.security: debug
+spring:
+  security:
+    user:
+      name: test
+      password: 123456
+      roles: ADMIN
+
+  redis:
+    host: 47.107.90.15
+    port: 6379
+    database: 8
+    lettuce:
+      pool:
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+        min-idle: 0
